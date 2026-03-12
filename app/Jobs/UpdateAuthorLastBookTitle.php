@@ -16,6 +16,7 @@ class UpdateAuthorLastBookTitle implements ShouldQueue
 
     public function handle(): void
     {
+        $this->book->load('authors');
         $this->book->authors->each(function ($author) {
             $author->update(['last_book_title' => $this->book->title]);
         });
